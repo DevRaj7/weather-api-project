@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" type ="text/css" href="api.css">
+
+<script src="https://kit.fontawesome.com/55f2239c37.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2><i class="fa-solid fa-location-dot"></i></i><span id="location"></span> </h2>
+                <h6 id="weather"></h6>
+                <h4><span id="temp"></span><sup>o</sup>C</h4>
+                <img src="" id="icon">
+                <button type="button" class="refresh" onclick="window.location.reload()"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+    </div>
+    
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    link="https://api.openweathermap.org/data/2.5/weather?q=hamirpur&appid=e00f9a374e276d97359a6e22b16895de";
+    var request=new XMLHttpRequest();
+    request.open('GET',link,true);
+    request.onload=function(){
+        var obj =JSON.parse(this.response);
+        console.log(obj);
+        document.getElementById('weather').innerHTML=obj.weather[0].description;
+        document.getElementById('location').innerHTML=obj.name;
+        document.getElementById('temp').innerHTML=Math.round(obj.main.temp-273.15);
+        document.getElementById('icon').src="https://openweathermap.org/img/w/"+obj.weather[0].icon+".png";
+    }
+    if(request.status>=200&& request.status<400)
+    {
+        var temp=obj.main.temp;
+    }
+    else{
+        console.log("The city data is not availabale");
+    }
+    request.send();
+</script>
+</html>
